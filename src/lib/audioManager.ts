@@ -1,14 +1,7 @@
 import { Howl, Howler } from 'howler';
 
 // Define the music states
-export type MusicState = 
-  | 'SILENT'
-  | 'TRADITION'
-  | 'TRANSFORMATION'
-  | 'DIGITAL'
-  | 'SMART_FARM'
-  | 'FUTURE'
-  | 'INDEPENDENCE_DAY';
+export type MusicState = string;
 
 // Define the available sound effects
 export type SFXType = 
@@ -24,7 +17,7 @@ class AudioManager {
   private static instance: AudioManager;
   
   private isMuted: boolean = false;
-  private currentMusicState: MusicState = 'SILENT';
+  // private currentMusicState: MusicState = 'SILENT'; // Removed unused state
   private masterVolume: number = 0.5;
   private musicVolume: number = 0.6;
   private sfxVolume: number = 0.8;
@@ -56,16 +49,11 @@ class AudioManager {
     const trackConfig = {
       loop: true,
       volume: 0,
-      preload: true, // Only preload the ones we need immediately in production, but true for local
+      preload: true, 
     };
 
-    // Replace these src paths with actual audio files in the public directory
-    this.musicTracks.set('TRADITION', new Howl({ src: ['/audio/music_tradition.wav'], ...trackConfig }));
-    this.musicTracks.set('TRANSFORMATION', new Howl({ src: ['/audio/music_transformation.wav'], ...trackConfig }));
-    this.musicTracks.set('DIGITAL', new Howl({ src: ['/audio/music_digital.wav'], ...trackConfig }));
-    this.musicTracks.set('SMART_FARM', new Howl({ src: ['/audio/music_smart_farm.wav'], ...trackConfig }));
-    this.musicTracks.set('FUTURE', new Howl({ src: ['/audio/music_future.wav'], ...trackConfig }));
-    this.musicTracks.set('INDEPENDENCE_DAY', new Howl({ src: ['/audio/music_independence.wav'], ...trackConfig }));
+    // The single background track
+    this.musicTracks.set('PLAYING', new Howl({ src: ['/audio/background_music.mp3'], ...trackConfig }));
   }
 
   private initSFXTracks() {
@@ -102,31 +90,15 @@ class AudioManager {
 
   // --- MUSIC STATE MACHINE ---
 
-  public setMusicState(newState: MusicState) {
-    if (this.currentMusicState === newState) return;
+  public setMusicState(_newState: MusicState) {
+    // With the single background track, we just ensure PLAYING is active
+    const bgTrack = this.musicTracks.get('PLAYING');
     
-    console.log(`[Audio] Transitioning music: ${this.currentMusicState} -> ${newState}`);
-
-    const oldTrack = this.musicTracks.get(this.currentMusicState);
-    const newTrack = this.musicTracks.get(newState);
-
-    // Fade out old track
-    if (oldTrack && oldTrack.playing()) {
-      oldTrack.fade(this.musicVolume, 0, this.crossfadeDuration);
-      setTimeout(() => {
-        oldTrack.pause();
-      }, this.crossfadeDuration);
+    if (bgTrack && !bgTrack.playing()) {
+      console.log(`[Audio] Starting background music`);
+      bgTrack.play();
+      bgTrack.fade(0, this.musicVolume, this.crossfadeDuration);
     }
-
-    // Fade in new track
-    if (newTrack) {
-      if (!newTrack.playing()) {
-        newTrack.play();
-      }
-      newTrack.fade(0, this.musicVolume, this.crossfadeDuration);
-    }
-
-    this.currentMusicState = newState;
   }
 
   // --- SFX SYSTEM ---
@@ -149,21 +121,9 @@ class AudioManager {
 
   // --- DYNAMIC MIXING ---
 
-  // For the Before/After slider specific mixing
-  public mixSliderAudio(percentage: number) {
-    // percentage: 0 = Tradition, 1 = Digital
-    const traditionTrack = this.musicTracks.get('TRADITION');
-    const digitalTrack = this.musicTracks.get('DIGITAL');
-
-    if (!traditionTrack || !digitalTrack) return;
-
-    // We don't change the global state machine here, we just override volumes dynamically
-    if (!traditionTrack.playing()) traditionTrack.play();
-    if (!digitalTrack.playing()) digitalTrack.play();
-
-    // Custom volume mapping to create the crossfade manually
-    traditionTrack.volume((1 - percentage) * this.musicVolume);
-    digitalTrack.volume(percentage * this.musicVolume);
+  // Since we only use one track now, slider audio mixing is disabled
+  public mixSliderAudio(_percentage: number) {
+    // Intentionally left blank as we just want continuous background music
   }
 }
 
