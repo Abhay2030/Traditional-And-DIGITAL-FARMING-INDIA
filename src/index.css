@@ -1,0 +1,428 @@
+@import "tailwindcss";
+
+/* ============================================
+   DIGITAL FARMING INDIA — Design System
+   "The Future of India Grows From Its Soil"
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap');
+
+/* --- Custom Theme Configuration --- */
+@theme {
+  /* Primary — Earth & Agriculture */
+  --color-forest: #123B2A;
+  --color-forest-light: #1a5a3f;
+  --color-agriculture: #2F7D32;
+  --color-agriculture-light: #4CAF50;
+  --color-leaf: #69B84F;
+  --color-leaf-light: #8BC34A;
+
+  /* National — Tricolour */
+  --color-saffron: #FF9933;
+  --color-saffron-light: #FFB74D;
+  --color-saffron-dark: #E68A00;
+  --color-india-green: #138808;
+  --color-ashoka-blue: #1A237E;
+  --color-ashoka-blue-light: #283593;
+  --color-navy: #000080;
+
+  /* Earth */
+  --color-soil: #765334;
+  --color-soil-light: #A67C5B;
+  --color-soil-dark: #5D3A1A;
+  --color-cream: #FFF9ED;
+  --color-cream-dark: #F5EDDA;
+  --color-wheat: #F5DEB3;
+
+  /* Technology */
+  --color-data-blue: #2196F3;
+  --color-sensor-cyan: #00BCD4;
+  --color-alert-amber: #FFA000;
+  --color-drone-purple: #7C4DFF;
+
+  /* Neutral */
+  --color-charcoal: #1A1A1A;
+  --color-slate: #4A5568;
+  --color-slate-light: #718096;
+  --color-mist: #F0F4F1;
+  --color-mist-dark: #E2E8E4;
+
+  /* Typography Scale */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-devanagari: 'Noto Sans Devanagari', 'Inter', sans-serif;
+
+  /* Motion Tokens */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Spacing */
+  --section-gap: 8rem;
+  --section-gap-mobile: 5rem;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-glow-saffron: 0 0 40px rgba(255, 153, 51, 0.3);
+  --shadow-glow-green: 0 0 40px rgba(47, 125, 50, 0.3);
+  --shadow-glow-blue: 0 0 40px rgba(33, 150, 243, 0.3);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+}
+
+/* --- Base Styles --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--text-scale, 100%);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- Accessibility: Text Scaling --- */
+html[data-text-size="large"] {
+  --text-scale: 125%;
+}
+html[data-text-size="extra-large"] {
+  --text-scale: 150%;
+}
+
+/* --- Accessibility: High Contrast --- */
+html[data-contrast="high"] {
+  --color-charcoal: #000000;
+  --color-slate: #1a1a1a;
+  --color-cream: #ffffff;
+  --color-mist: #f0f0f0;
+}
+
+html[data-contrast="high"] .section-header__title {
+  text-shadow: none !important;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html[data-reduced-motion="true"] * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.15ms !important;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-devanagari {
+  font-family: var(--font-devanagari);
+  font-size: 1.08em;
+  line-height: 1.5;
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: rgba(47, 125, 50, 0.2);
+  color: var(--color-forest);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-agriculture);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-forest);
+}
+
+/* --- Focus States --- */
+:focus-visible {
+  outline: 3px solid var(--color-ashoka-blue);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Skip Link --- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  padding: 12px 24px;
+  background: var(--color-ashoka-blue);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  z-index: 10000;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* --- Utility Classes --- */
+.gradient-tricolour {
+  background: linear-gradient(
+    135deg,
+    var(--color-saffron) 0%,
+    var(--color-saffron) 33%,
+    #FFFFFF 33%,
+    #FFFFFF 66%,
+    var(--color-india-green) 66%,
+    var(--color-india-green) 100%
+  );
+}
+
+.gradient-earth {
+  background: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    var(--color-wheat) 50%,
+    var(--color-soil-light) 100%
+  );
+}
+
+.gradient-tech {
+  background: linear-gradient(
+    135deg,
+    var(--color-forest) 0%,
+    var(--color-agriculture) 50%,
+    var(--color-data-blue) 100%
+  );
+}
+
+.gradient-sky {
+  background: linear-gradient(
+    180deg,
+    #87CEEB 0%,
+    #B8E6F0 30%,
+    #FFF9ED 100%
+  );
+}
+
+.gradient-sunset {
+  background: linear-gradient(
+    180deg,
+    #FF6B35 0%,
+    var(--color-saffron) 30%,
+    #FFD700 60%,
+    var(--color-cream) 100%
+  );
+}
+
+.text-gradient-farm {
+  background: linear-gradient(135deg, var(--color-forest) 0%, var(--color-agriculture) 50%, var(--color-leaf) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-tricolour {
+  background: linear-gradient(90deg, var(--color-saffron) 0%, var(--color-ashoka-blue) 50%, var(--color-india-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Noise/Grain Texture --- */
+.texture-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Glass Effect --- */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-cream {
+  background: rgba(255, 249, 237, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 249, 237, 0.4);
+}
+
+/* --- Warli Art Pattern (SVG border) --- */
+.warli-border {
+  border-image-source: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5 L35 35 L5 35 Z' fill='none' stroke='%23765334' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+  border-image-slice: 20;
+  border-image-repeat: round;
+}
+
+/* --- Rangoli Divider --- */
+.divider-rangoli {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-saffron) 0px,
+    var(--color-saffron) 8px,
+    transparent 8px,
+    transparent 12px,
+    white 12px,
+    white 20px,
+    transparent 20px,
+    transparent 24px,
+    var(--color-india-green) 24px,
+    var(--color-india-green) 32px,
+    transparent 32px,
+    transparent 36px
+  );
+  border-radius: var(--radius-full);
+  opacity: 0.6;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-sensor {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes data-flow {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes grow-up {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
+}
+
+@keyframes rain-drop {
+  0% { transform: translateY(-100vh) translateX(0); opacity: 0.7; }
+  100% { transform: translateY(100vh) translateX(-20px); opacity: 0; }
+}
+
+@keyframes chakra-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Container --- */
+.container-narrative {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+.container-text {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* --- Responsive Section Padding --- */
+.section-padding {
+  padding-top: clamp(4rem, 10vw, 10rem);
+  padding-bottom: clamp(4rem, 10vw, 10rem);
+}
+
+/* --- Card Styles --- */
+.card-tech {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s var(--ease-smooth);
+  border: 1px solid rgba(18, 59, 42, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-tech::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-agriculture) 0%, var(--color-leaf) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.card-tech:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-tech:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
