@@ -30,6 +30,34 @@ function App() {
     };
   }, [showIntro]);
 
+  // Handle global background music auto-play
+  useEffect(() => {
+    const startAudio = () => {
+      // Use the audio manager instance imported here or available globally
+      import('./lib/audioManager').then(({ audioManager }) => {
+        audioManager.setMusicState('PLAYING');
+      });
+      // Remove listeners once triggered
+      ['click', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+        document.removeEventListener(event, startAudio);
+      });
+    };
+
+    // Attempt immediately (might work if user already interacted with domain before)
+    startAudio();
+
+    // Attach as fallback for strict browser autoplay policies
+    ['click', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+      document.addEventListener(event, startAudio, { once: true, passive: true });
+    });
+
+    return () => {
+      ['click', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+        document.removeEventListener(event, startAudio);
+      });
+    };
+  }, []);
+
   const handleIntroComplete = () => {
     setShowIntro(false);
   };

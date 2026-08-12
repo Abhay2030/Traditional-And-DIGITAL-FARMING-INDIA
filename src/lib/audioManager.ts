@@ -53,7 +53,7 @@ class AudioManager {
     };
 
     // The single background track
-    this.musicTracks.set('PLAYING', new Howl({ src: ['/audio/background_music.mp3'], ...trackConfig }));
+    this.musicTracks.set('PLAYING', new Howl({ src: ['/audio/background_music.mp3.mp3'], ...trackConfig }));
   }
 
   private initSFXTracks() {
