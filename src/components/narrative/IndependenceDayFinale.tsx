@@ -1,11 +1,21 @@
-import { motion } from 'motion/react';
+import { motion, useInView } from 'motion/react';
+import { useRef, useEffect } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { audioManager } from '../../lib/audioManager';
 
 export function IndependenceDayFinale() {
   const reduced = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      audioManager.setMusicState('INDEPENDENCE_DAY');
+    }
+  }, [isInView]);
 
   return (
-    <section id="finale" className="relative h-screen min-h-[800px] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+    <section ref={ref} id="finale" className="relative h-screen min-h-[800px] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
       
       {/* Background Image: Sunset Field */}
       <div 

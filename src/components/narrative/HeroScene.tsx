@@ -1,13 +1,22 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { AshokaChakra } from '../ui/AshokaChakra';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useAudio } from '../../contexts/AudioContext';
+import { audioManager } from '../../lib/audioManager';
 
 export function HeroScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
+  const { setMusicState } = useAudio();
+
+  useEffect(() => {
+    // When the hero mounts, we establish the initial musical state.
+    // The user's audio controls will dictate if this actually emits sound.
+    setMusicState('TRADITION');
+  }, [setMusicState]);
 
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const titleY = useTransform(scrollYProgress, [0, 0.5], [0, -80]);
@@ -216,6 +225,8 @@ export function HeroScene() {
           >
             <a
               href="#technology-hub"
+              onMouseEnter={() => audioManager.playSFX('ui_hover')}
+              onClick={() => audioManager.playSFX('ui_click')}
               className="group inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-agriculture)] text-white font-semibold rounded-full hover:bg-[var(--color-agriculture-light)] transition-all shadow-lg hover:shadow-xl active:scale-95"
             >
               Explore the Smart Farm
@@ -223,6 +234,8 @@ export function HeroScene() {
             </a>
             <a
               href="#traditional-knowledge"
+              onMouseEnter={() => audioManager.playSFX('ui_hover')}
+              onClick={() => audioManager.playSFX('ui_click')}
               className="group inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 hover:bg-white/20 transition-all active:scale-95"
             >
               Start the Story

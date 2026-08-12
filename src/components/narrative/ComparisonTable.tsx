@@ -52,15 +52,26 @@ function FlipCard({ data, delay, reduced }: { data: ComparisonItem, delay: numbe
         >
           {/* TRADITIONAL SIDE (Front) */}
           <div 
-            className="absolute inset-0 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-2xl border border-white/10"
+            className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             style={{ 
-              backgroundImage: `linear-gradient(135deg, rgba(166,124,82,0.4) 0%, rgba(109,76,42,0.7) 100%), url('/images/card_bg_traditional.png')`, 
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden'
             }}
           >
+            {/* Animated Background Image */}
+            <motion.div 
+              className="absolute inset-0 w-full h-full"
+              style={{
+                backgroundImage: `linear-gradient(135deg, rgba(166,124,82,0.6) 0%, rgba(109,76,42,0.8) 100%), url('/images/${data.traditionalImage}'), url('/images/card_bg_traditional.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+              animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+            
+            {/* Content Container */}
+            <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <span className="text-5xl bg-white/10 backdrop-blur-sm p-4 rounded-2xl shadow-inner border border-white/10">
                 {data.icon}
@@ -83,20 +94,32 @@ function FlipCard({ data, delay, reduced }: { data: ComparisonItem, delay: numbe
                <circle cx="100" cy="100" r="60" fill="none" stroke="white" strokeWidth="2" />
                <circle cx="100" cy="100" r="40" fill="none" stroke="white" strokeWidth="2" />
             </svg>
+            </div>
           </div>
 
           {/* MODERN SIDE (Back) */}
           <div 
-            className="absolute inset-0 rounded-3xl p-6 md:p-8 flex flex-col justify-between overflow-hidden shadow-2xl border border-white/20"
+            className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
             style={{ 
-              backgroundImage: `linear-gradient(135deg, rgba(0,188,212,0.4) 0%, rgba(47,125,50,0.8) 100%), url('/images/card_bg_modern.png')`, 
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)' 
             }}
           >
+            {/* Animated Background Image */}
+            <motion.div 
+              className="absolute inset-0 w-full h-full"
+              style={{
+                backgroundImage: `linear-gradient(135deg, rgba(0,188,212,0.6) 0%, rgba(47,125,50,0.9) 100%), url('/images/${data.modernImage}'), url('/images/card_bg_modern.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            />
+            
+            {/* Content Container */}
+            <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
             {/* Tech grid overlay */}
             <div 
               className="absolute inset-0 opacity-20 pointer-events-none" 
@@ -129,11 +152,13 @@ function FlipCard({ data, delay, reduced }: { data: ComparisonItem, delay: numbe
             {/* Scanning line animation */}
             {!reduced && (
               <motion.div 
-                className="absolute left-0 right-0 h-1 bg-white/60 shadow-[0_0_20px_rgba(255,255,255,1)] pointer-events-none"
+                className="absolute left-0 right-0 h-1 bg-white/60 shadow-[0_0_20px_rgba(255,255,255,1)] pointer-events-none z-20"
                 animate={isHovered ? { top: ['0%', '100%', '0%'] } : { top: '0%' }}
                 transition={{ duration: 2.5, ease: 'linear', repeat: Infinity }}
               />
             )}
+            
+            </div>
           </div>
         </motion.div>
       </div>

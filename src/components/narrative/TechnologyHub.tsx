@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { SectionHeader } from '../core/SectionHeader';
 import { ScrollReveal } from '../ui/ScrollReveal';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { technologies } from '../../data/technologies';
 import { X, Play } from 'lucide-react';
 import { useAccessibility } from '../../contexts/AccessibilityContext';
+import { audioManager } from '../../lib/audioManager';
 
 export function TechnologyHub() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -13,8 +14,17 @@ export function TechnologyHub() {
   const { simpleMode } = useAccessibility();
   const selected = technologies.find(t => t.id === selectedId);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-20% 0px -20% 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      audioManager.setMusicState('SMART_FARM');
+    }
+  }, [isInView]);
+
   return (
-    <section id="technology-hub" className="section-padding relative overflow-hidden bg-[var(--color-cream)]">
+    <section ref={sectionRef} id="technology-hub" className="section-padding relative overflow-hidden bg-[var(--color-cream)]">
       <div className="container-narrative">
         <SectionHeader
           badge="Digital Farming"
@@ -27,7 +37,11 @@ export function TechnologyHub() {
           {technologies.map((tech, i) => (
             <ScrollReveal key={tech.id} delay={i * 0.05} direction="up">
               <motion.button
-                onClick={() => setSelectedId(tech.id)}
+                onClick={() => {
+                  audioManager.playSFX('ui_click');
+                  setSelectedId(tech.id);
+                }}
+                onMouseEnter={() => audioManager.playSFX('ui_hover')}
                 className="w-full h-full flex flex-col items-center justify-center p-8 rounded-3xl bg-white border border-gray-100 hover:border-gray-300 transition-all shadow-sm hover:shadow-xl group"
                 whileHover={reduced ? {} : { y: -8 }}
                 whileTap={{ scale: 0.98 }}
@@ -111,7 +125,11 @@ export function TechnologyHub() {
                 </div>
 
                 {/* Level 04: Interaction Button */}
-                <button className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-bold tracking-widest uppercase text-sm shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95" style={{ background: selected.color }}>
+                <button 
+                  onClick={() => audioManager.playSFX('data_processing')}
+                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-bold tracking-widest uppercase text-sm shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95" 
+                  style={{ background: selected.color }}
+                >
                   <Play size={18} className="fill-current" />
                   Watch it Work
                 </button>

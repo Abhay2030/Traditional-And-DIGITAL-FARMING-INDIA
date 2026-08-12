@@ -3,16 +3,18 @@ export interface ComparisonItem {
   traditional: string;
   modern: string;
   icon: string;
+  traditionalImage: string;
+  modernImage: string;
 }
 
 export const comparisonData: ComparisonItem[] = [
-  { category: 'Observation', traditional: 'Human observation', modern: 'Human + sensors + imagery', icon: '👁️' },
-  { category: 'Water', traditional: 'Manual irrigation decisions', modern: 'Information-supported irrigation', icon: '💧' },
-  { category: 'Field Monitoring', traditional: 'Walking through the field', modern: 'Field visits + drone/satellite/sensor data', icon: '🌾' },
-  { category: 'Weather', traditional: 'Experience and local observation', modern: 'Weather data + forecasts + local observation', icon: '🌤️' },
-  { category: 'Records', traditional: 'Paper / memory', modern: 'Digital records', icon: '📋' },
-  { category: 'Machinery', traditional: 'Manual operations', modern: 'Guidance, mapping & connected machinery', icon: '🚜' },
-  { category: 'Decision Making', traditional: 'Experience', modern: 'Experience + data + analytics', icon: '🧠' },
+  { category: 'Observation', traditional: 'Human observation', modern: 'Human + sensors + imagery', icon: '👁️', traditionalImage: 'trad_observation.png', modernImage: 'mod_observation.png' },
+  { category: 'Water', traditional: 'Manual irrigation decisions', modern: 'Information-supported irrigation', icon: '💧', traditionalImage: 'trad_water.png', modernImage: 'mod_water.png' },
+  { category: 'Field Monitoring', traditional: 'Walking through the field', modern: 'Field visits + drone/satellite/sensor data', icon: '🌾', traditionalImage: 'trad_observation.png', modernImage: 'mod_observation.png' },
+  { category: 'Weather', traditional: 'Experience and local observation', modern: 'Weather data + forecasts + local observation', icon: '🌤️', traditionalImage: 'trad_observation.png', modernImage: 'mod_observation.png' },
+  { category: 'Records', traditional: 'Paper / memory', modern: 'Digital records', icon: '📋', traditionalImage: 'trad_machinery.png', modernImage: 'mod_machinery.png' },
+  { category: 'Machinery', traditional: 'Manual operations', modern: 'Guidance, mapping & connected machinery', icon: '🚜', traditionalImage: 'trad_machinery.png', modernImage: 'mod_machinery.png' },
+  { category: 'Decision Making', traditional: 'Experience', modern: 'Experience + data + analytics', icon: '🧠', traditionalImage: 'trad_water.png', modernImage: 'mod_water.png' },
 ];
 
 export interface ProblemSolution {

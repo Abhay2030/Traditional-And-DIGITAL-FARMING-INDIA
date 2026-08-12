@@ -1,5 +1,7 @@
 import { AccessibilityProvider } from './contexts/AccessibilityContext';
+import { AudioProvider } from './contexts/AudioContext';
 import { AccessibilityPanel } from './components/accessibility/AccessibilityPanel';
+import { AudioControls } from './components/ui/AudioControls';
 
 import { Footer } from './components/narrative/Footer';
 import { PatrioticParticles } from './components/effects/PatrioticParticles';
@@ -28,31 +30,42 @@ function App() {
   const handleIntroComplete = () => {
     setShowIntro(false);
   };
+  
   return (
     <AccessibilityProvider>
-      <BrowserRouter>
-        {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
-        
-        {/* Skip link for accessibility */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
+      <AudioProvider>
+        <BrowserRouter>
+          {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
+          
+          {/* Skip link for accessibility */}
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
 
-        <Routes>
-          <Route path="/" element={
-            <>
-              <PatrioticParticles />
-              <TricolorBorders />
-              <main id="main-content">
-                <Exhibition />
-              </main>
-              <Footer />
-              <AccessibilityPanel />
-            </>
-          } />
-          <Route path="/team" element={<TeamPage />} />
-        </Routes>
-      </BrowserRouter>
+          {/* Global UI Overlays */}
+          <AudioControls />
+
+          <Routes>
+            <Route path="/" element={
+              <>
+                <PatrioticParticles />
+                <TricolorBorders />
+                <main id="main-content">
+                  <Exhibition />
+                </main>
+                <Footer />
+                <AccessibilityPanel />
+              </>
+            } />
+            <Route path="/team" element={
+              <>
+                <TeamPage />
+                <AccessibilityPanel />
+              </>
+            } />
+          </Routes>
+        </BrowserRouter>
+      </AudioProvider>
     </AccessibilityProvider>
   );
 }

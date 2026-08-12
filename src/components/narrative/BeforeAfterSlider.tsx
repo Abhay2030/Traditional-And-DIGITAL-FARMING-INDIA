@@ -1,10 +1,16 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { ScrollReveal } from '../ui/ScrollReveal';
+import { audioManager } from '../../lib/audioManager';
 
 export function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+
+  useEffect(() => {
+    // dynamically mix the Tradition and Digital audio tracks based on slider position
+    audioManager.mixSliderAudio(sliderPos / 100);
+  }, [sliderPos]);
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;

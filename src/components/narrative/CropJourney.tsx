@@ -1,14 +1,24 @@
+import { useRef, useEffect } from 'react';
 import { SectionHeader } from '../core/SectionHeader';
 import { ScrollReveal } from '../ui/ScrollReveal';
-import { motion } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { cropJourney } from '../../data/content';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { audioManager } from '../../lib/audioManager';
 
 export function CropJourney() {
   const reduced = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-20% 0px -20% 0px" });
+
+  useEffect(() => {
+    if (isInView) {
+      audioManager.setMusicState('FUTURE');
+    }
+  }, [isInView]);
 
   return (
-    <section id="crop-journey" className="section-padding bg-[var(--color-cream)] relative overflow-hidden">
+    <section ref={sectionRef} id="crop-journey" className="section-padding bg-[var(--color-cream)] relative overflow-hidden">
       <div className="container-narrative">
         <SectionHeader
           badge="The Cycle of Life"
