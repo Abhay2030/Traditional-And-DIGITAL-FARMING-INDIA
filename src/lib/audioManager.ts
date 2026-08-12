@@ -60,12 +60,12 @@ class AudioManager {
     };
 
     // Replace these src paths with actual audio files in the public directory
-    this.musicTracks.set('TRADITION', new Howl({ src: ['/audio/music_tradition.mp3'], ...trackConfig }));
-    this.musicTracks.set('TRANSFORMATION', new Howl({ src: ['/audio/music_transformation.mp3'], ...trackConfig }));
-    this.musicTracks.set('DIGITAL', new Howl({ src: ['/audio/music_digital.mp3'], ...trackConfig }));
-    this.musicTracks.set('SMART_FARM', new Howl({ src: ['/audio/music_smart_farm.mp3'], ...trackConfig }));
-    this.musicTracks.set('FUTURE', new Howl({ src: ['/audio/music_future.mp3'], ...trackConfig }));
-    this.musicTracks.set('INDEPENDENCE_DAY', new Howl({ src: ['/audio/music_independence.mp3'], ...trackConfig }));
+    this.musicTracks.set('TRADITION', new Howl({ src: ['/audio/music_tradition.wav'], ...trackConfig }));
+    this.musicTracks.set('TRANSFORMATION', new Howl({ src: ['/audio/music_transformation.wav'], ...trackConfig }));
+    this.musicTracks.set('DIGITAL', new Howl({ src: ['/audio/music_digital.wav'], ...trackConfig }));
+    this.musicTracks.set('SMART_FARM', new Howl({ src: ['/audio/music_smart_farm.wav'], ...trackConfig }));
+    this.musicTracks.set('FUTURE', new Howl({ src: ['/audio/music_future.wav'], ...trackConfig }));
+    this.musicTracks.set('INDEPENDENCE_DAY', new Howl({ src: ['/audio/music_independence.wav'], ...trackConfig }));
   }
 
   private initSFXTracks() {
@@ -74,13 +74,13 @@ class AudioManager {
       preload: true,
     };
 
-    this.sfxTracks.set('ui_click', new Howl({ src: ['/audio/sfx_ui_click.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('ui_hover', new Howl({ src: ['/audio/sfx_ui_hover.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('drone_flight', new Howl({ src: ['/audio/sfx_drone.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('sensor_pulse', new Howl({ src: ['/audio/sfx_sensor.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('water_flow', new Howl({ src: ['/audio/sfx_water.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('data_processing', new Howl({ src: ['/audio/sfx_data.mp3'], ...sfxConfig }));
-    this.sfxTracks.set('tractor_engine', new Howl({ src: ['/audio/sfx_tractor.mp3'], ...sfxConfig }));
+    this.sfxTracks.set('ui_click', new Howl({ src: ['/audio/sfx_ui_click.wav'], ...sfxConfig }));
+    this.sfxTracks.set('ui_hover', new Howl({ src: ['/audio/sfx_ui_hover.wav'], ...sfxConfig }));
+    this.sfxTracks.set('drone_flight', new Howl({ src: ['/audio/sfx_drone.wav'], ...sfxConfig }));
+    this.sfxTracks.set('sensor_pulse', new Howl({ src: ['/audio/sfx_sensor.wav'], ...sfxConfig }));
+    this.sfxTracks.set('water_flow', new Howl({ src: ['/audio/sfx_water.wav'], ...sfxConfig }));
+    this.sfxTracks.set('data_processing', new Howl({ src: ['/audio/sfx_data.wav'], ...sfxConfig }));
+    this.sfxTracks.set('tractor_engine', new Howl({ src: ['/audio/sfx_tractor.wav'], ...sfxConfig }));
   }
 
   // --- CONTROLS ---
