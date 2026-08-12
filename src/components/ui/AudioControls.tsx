@@ -18,7 +18,7 @@ export function AudioControls() {
 
   return (
     <motion.div
-      className="fixed bottom-6 left-6 z-[90]"
+      className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-[90]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 2, duration: 1 }}

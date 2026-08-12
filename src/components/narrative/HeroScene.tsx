@@ -24,9 +24,9 @@ export function HeroScene() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   return (
-    <section ref={containerRef} className="relative h-[200vh]" id="hero" aria-label="Digital Farming India - Hero">
+    <section ref={containerRef} className="relative h-[200dvh]" id="hero" aria-label="Digital Farming India - Hero">
       {/* Sticky hero container */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] overflow-hidden">
         {/* Background layers with parallax */}
         <motion.div
           className="absolute inset-0 bg-[#02050A]"
@@ -179,7 +179,7 @@ export function HeroScene() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] drop-shadow-[0_10px_50px_rgba(0,0,0,0.8)] relative z-10"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] drop-shadow-[0_10px_50px_rgba(0,0,0,0.8)] relative z-10"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50">DIGITAL</span><br />

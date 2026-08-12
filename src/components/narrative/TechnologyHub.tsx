@@ -77,35 +77,35 @@ export function TechnologyHub() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed inset-4 md:inset-10 z-[51] bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+              className="fixed inset-0 md:inset-10 z-[51] bg-white md:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
               role="dialog"
             >
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedId(null)} 
-                className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors"
               >
                 <X size={24} />
               </button>
 
               {/* LEFT HALF: Huge Visual / Animation */}
-              <div className="w-full md:w-1/2 h-64 md:h-full relative flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${selected.color}20, ${selected.color}05)` }}>
+              <div className="w-full md:w-1/2 h-48 md:h-full relative flex items-center justify-center shrink-0" style={{ background: `linear-gradient(135deg, ${selected.color}20, ${selected.color}05)` }}>
                 <WatchItWorkAnimation color={selected.color} Icon={selected.icon} />
               </div>
 
               {/* RIGHT HALF: Very Short Text */}
-              <div className="w-full md:w-1/2 h-full p-8 md:p-16 overflow-y-auto flex flex-col justify-center">
+              <div className="w-full md:w-1/2 h-full p-6 md:p-16 overflow-y-auto flex flex-col justify-start md:justify-center">
                 
                 {/* Level 02: Big Headline & One-line */}
-                <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-4" style={{ fontFamily: 'var(--font-display)', color: selected.color }}>
+                <h2 className="text-3xl md:text-6xl font-bold uppercase tracking-tight mb-2 md:mb-4" style={{ fontFamily: 'var(--font-display)', color: selected.color }}>
                   {selected.title}
                 </h2>
-                <h3 className="text-xl md:text-3xl font-bold text-[var(--color-charcoal)] mb-12">
+                <h3 className="text-lg md:text-3xl font-bold text-[var(--color-charcoal)] mb-8 md:mb-12">
                   {selected.tagline}
                 </h3>
 
                 {/* Level 03: Three tiny points */}
-                <div className="space-y-8 mb-12">
+                <div className="space-y-6 md:space-y-8 mb-8 md:mb-12">
                   <div>
                     <div className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1">What</div>
                     <div className={`text-[var(--color-charcoal)] font-medium ${simpleMode ? 'text-xl' : 'text-lg'}`}>{selected.simpleExplanation}</div>

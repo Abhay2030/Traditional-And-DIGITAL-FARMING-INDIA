@@ -15,7 +15,7 @@ export function IndependenceDayFinale() {
   }, [isInView]);
 
   return (
-    <section ref={ref} id="finale" className="relative h-screen min-h-[800px] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+    <section ref={ref} id="finale" className="relative min-h-[100dvh] w-full overflow-hidden bg-black flex flex-col items-center justify-center">
       
       {/* Background Image: Sunset Field */}
       <div 

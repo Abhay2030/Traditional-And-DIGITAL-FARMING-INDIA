@@ -168,7 +168,7 @@ export function TeamPage() {
           <section className="w-full text-center pt-24">
             <ScrollReveal>
               <h3 className="text-xs md:text-sm font-bold tracking-[0.3em] text-[var(--color-leaf)] uppercase mb-6">Old Farming & Modern Farming</h3>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-16 tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Our Team</h2>
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-16 tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Our Team</h2>
             </ScrollReveal>
 
             {/* TEAM PHOTO */}

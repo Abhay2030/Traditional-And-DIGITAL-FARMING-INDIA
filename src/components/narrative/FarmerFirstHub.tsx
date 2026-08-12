@@ -18,7 +18,7 @@ export function FarmerFirstHub() {
   const radius = 180;
 
   return (
-    <section id="farmer-first" className="relative min-h-screen py-20 bg-white flex flex-col items-center justify-center overflow-hidden">
+    <section id="farmer-first" className="relative min-h-[100dvh] py-20 bg-white flex flex-col items-center justify-center overflow-hidden">
       
       {/* Central Orbit Visual */}
       <ScrollReveal>

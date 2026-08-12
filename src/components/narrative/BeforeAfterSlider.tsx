@@ -25,7 +25,7 @@ export function BeforeAfterSlider() {
   const handleTouchMove = (e: React.TouchEvent) => { handleMove(e.touches[0].clientX); };
 
   return (
-    <section id="before-after" className="relative h-screen min-h-[700px] w-full overflow-hidden bg-black flex flex-col justify-center select-none">
+    <section id="before-after" className="relative min-h-[100dvh] w-full overflow-hidden bg-black flex flex-col justify-center select-none">
       
       {/* Title - Center Overlay (Always visible) */}
       <div className="absolute top-[10%] left-1/2 -translate-x-1/2 z-30 text-center pointer-events-none">
@@ -41,7 +41,7 @@ export function BeforeAfterSlider() {
 
       <div
         ref={containerRef}
-        className="relative w-full h-full cursor-col-resize"
+        className="relative w-full h-full cursor-col-resize touch-none"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}

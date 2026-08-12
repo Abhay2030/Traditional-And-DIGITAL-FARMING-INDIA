@@ -3,7 +3,7 @@ import { ScrollReveal } from '../ui/ScrollReveal';
 
 export function TraditionalKnowledge() {
   return (
-    <section id="traditional-knowledge" className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section id="traditional-knowledge" className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
