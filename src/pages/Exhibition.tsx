@@ -20,6 +20,33 @@ export function Exhibition() {
 
   return (
     <>
+      {/* Floating ACES Logo (Top Left) */}
+      <motion.div
+        className="fixed top-6 left-6 z-50 md:top-8 md:left-8"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 2.0, duration: 0.8, ease: "easeOut" }}
+      >
+        <a 
+          href="#aces-identity"
+          className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#050B14]/80 backdrop-blur-xl border border-white/10 hover:border-white/30 shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-500 overflow-hidden"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('aces-identity')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          {/* Light sweep */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -translate-x-full group-hover:translate-x-full" />
+          
+          <img 
+            src="/images/aces-logo.png" 
+            alt="ACES Logo" 
+            className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          />
+        </a>
+      </motion.div>
+
       {/* Floating Our Team Button */}
       <motion.div 
         className="fixed top-6 right-6 z-50 md:top-8 md:right-8"
