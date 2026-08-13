@@ -20,35 +20,44 @@ export function BeforeAfterSlider() {
     setSliderPos((x / rect.width) * 100);
   }, []);
 
-  const handleMouseDown = () => { isDragging.current = true; };
+  const handleMouseDown = (e: React.MouseEvent) => { 
+    isDragging.current = true; 
+    handleMove(e.clientX);
+  };
+  const handleTouchStart = (e: React.TouchEvent) => { 
+    isDragging.current = true; 
+    handleMove(e.touches[0].clientX);
+  };
   const handleMouseUp = () => { isDragging.current = false; };
   const handleMouseMove = (e: React.MouseEvent) => { if (isDragging.current) handleMove(e.clientX); };
-  const handleTouchMove = (e: React.TouchEvent) => { handleMove(e.touches[0].clientX); };
+  const handleTouchMove = (e: React.TouchEvent) => { if (isDragging.current) handleMove(e.touches[0].clientX); };
 
   return (
     <section id="before-after" className="relative min-h-[100dvh] w-full overflow-hidden bg-black flex flex-col select-none">
       
-      {/* Title - Pushed to the top safely */}
-      <div className="absolute top-10 md:top-20 left-1/2 -translate-x-1/2 z-50 text-center pointer-events-none w-full px-4">
+      {/* Title - Upgraded for cinematic outstanding look */}
+      <div className="absolute top-8 md:top-16 left-1/2 -translate-x-1/2 z-50 text-center pointer-events-none w-full px-4">
         <ScrollReveal>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tighter" style={{ fontFamily: 'var(--font-display)', textShadow: '0 10px 50px rgba(0,0,0,1)' }}>
-            Same Farm.<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] drop-shadow-lg">
-              New Tools.
-            </span>
-          </h2>
+          <div className="inline-block px-8 py-4 md:px-12 md:py-6 rounded-[2rem] bg-black/50 backdrop-blur-2xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-saffron)]/10 to-[var(--color-india-green)]/10 opacity-50" />
+            <h2 className="relative z-10 text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter" style={{ fontFamily: 'var(--font-display)' }}>
+              Same Farm. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] drop-shadow-2xl ml-2 md:ml-4">New Tools.</span>
+            </h2>
+          </div>
         </ScrollReveal>
       </div>
 
       <div
         ref={containerRef}
-        className="relative w-full h-full flex-grow cursor-col-resize touch-none mt-40 md:mt-0"
+        className="relative w-full h-full flex-grow cursor-col-resize touch-pan-y mt-32 md:mt-0"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleMouseUp}
+        onTouchCancel={handleMouseUp}
       >
         {/* RIGHT SIDE: DIGITAL FARMING (Background Layer) */}
         <div className="absolute inset-0 bg-[#061121] flex flex-col justify-end md:justify-center px-4 md:px-32 pb-20 md:pb-0 overflow-hidden">
@@ -135,19 +144,24 @@ export function BeforeAfterSlider() {
 function ComparisonItem({ right, icon, label, sub, color }: { left?: boolean, right?: boolean, icon: string, label: string, sub: string, color: string }) {
   return (
     <motion.div 
-      className={`flex items-center gap-4 md:gap-6 ${right ? 'flex-row-reverse' : ''} bg-black/40 backdrop-blur-xl p-3 md:p-4 rounded-3xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] w-full max-w-[300px] md:max-w-none group hover:bg-black/60 transition-colors`}
+      className={`relative flex items-center gap-4 md:gap-6 ${right ? 'flex-row-reverse' : ''} bg-[#0A111A]/80 backdrop-blur-2xl p-4 md:p-5 rounded-[2rem] border border-white/10 hover:border-white/30 shadow-[0_10px_40px_rgba(0,0,0,0.6)] w-full max-w-[320px] md:max-w-[420px] group transition-all duration-500 overflow-hidden`}
       whileHover={{ scale: 1.05, y: -5 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
       <div 
-        className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-center text-2xl md:text-3xl shadow-inner relative overflow-hidden"
+        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" 
+        style={{ background: `linear-gradient(to ${right ? 'left' : 'right'}, ${color}, transparent)` }} 
+      />
+      
+      <div 
+        className="relative z-10 w-14 h-14 md:w-20 md:h-20 shrink-0 rounded-[1.25rem] bg-black/50 border border-white/10 group-hover:border-white/30 flex items-center justify-center text-3xl md:text-4xl shadow-inner overflow-hidden transition-colors duration-300"
       >
-        <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity" style={{ background: `radial-gradient(circle, ${color} 0%, transparent 70%)` }} />
-        <span className="relative z-10">{icon}</span>
+        <div className="absolute inset-0 opacity-20 group-hover:opacity-50 transition-opacity duration-500" style={{ background: `radial-gradient(circle, ${color} 0%, transparent 80%)` }} />
+        <span className="relative z-10 drop-shadow-md group-hover:scale-110 transition-transform duration-500">{icon}</span>
       </div>
-      <div className={`flex-grow ${right ? 'text-right' : 'text-left'}`}>
-        <div className="text-white/60 text-xs md:text-sm font-medium tracking-widest uppercase mb-1">{sub}</div>
-        <div className="text-white text-lg md:text-2xl font-bold uppercase tracking-wide leading-tight">{label}</div>
+      <div className={`relative z-10 flex-grow ${right ? 'text-right' : 'text-left'}`}>
+        <div className="text-white/50 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-1.5 group-hover:text-white/80 transition-colors" style={{ color: color }}>{sub}</div>
+        <div className="text-white text-lg md:text-2xl font-black uppercase tracking-wider leading-tight drop-shadow-lg">{label}</div>
       </div>
     </motion.div>
   );
