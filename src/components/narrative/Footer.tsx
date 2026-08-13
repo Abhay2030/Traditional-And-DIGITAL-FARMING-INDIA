@@ -82,6 +82,13 @@ export function Footer() {
           </div>
         </div>
 
+        {/* ACES Official Credit */}
+        <div className="pt-16 pb-12 mt-4 border-t border-white/5 flex flex-col items-center justify-center text-center">
+          <p className="text-[10px] md:text-xs font-bold tracking-[0.25em] text-white/60 uppercase">
+            Presented by <span className="text-white">ACES</span> <span className="mx-2 text-white/20">|</span> Computer Engineering Department <span className="mx-2 text-white/20">|</span> SVIT Nashik 🇮🇳
+          </p>
+        </div>
+
         {/* Bottom bar - Perfectly aligned 3-column layout */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           

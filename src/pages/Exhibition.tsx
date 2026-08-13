@@ -9,6 +9,7 @@ import { SustainabilityPillars } from '../components/narrative/SustainabilityPil
 import { IndependenceDayFinale } from '../components/narrative/IndependenceDayFinale';
 import { VisionMission } from '../components/narrative/VisionMission';
 import { CollegeIdentity } from '../components/narrative/CollegeIdentity';
+import { AcesIdentity } from '../components/narrative/AcesIdentity';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Users } from 'lucide-react';
@@ -85,6 +86,7 @@ export function Exhibition() {
       <IndependenceDayFinale />
       <VisionMission />
       <CollegeIdentity />
+      <AcesIdentity />
     </>
   );
 }
