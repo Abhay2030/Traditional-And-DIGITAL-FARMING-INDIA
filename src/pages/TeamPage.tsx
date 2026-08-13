@@ -9,16 +9,16 @@ import { Footer } from '../components/narrative/Footer';
 import { AccessibilityPanel } from '../components/accessibility/AccessibilityPanel';
 
 const teamMembers = [
-  "Vedant Kokane",
-  "Abhay Donde",
-  "Siddhant Atre",
+  "Vedant Santosh Kokane",
+  "Abhay Sachin Donde",
+  "Siddharth Shantaram Atre",
   "Trisha Ajay Patil",
-  "Harde Payal Venunath",
+  "Payal Venunath Harde",
   "Bachkar Vaishnavi Popat",
-  "Jadhav Vijaya D.",
-  "Bane Gayatri Shivaji",
-  "Ghumare Siddhi Vijay",
-  "Darade Harshada Anil",
+  "Vijaya Digambar Jadhav",
+  "Gayatri Shivaji Bane",
+  "Siddhi Vijay Ghumare",
+  "Harshada Anil Darade",
   "Aditi Sunil Wamane"
 ];
 
@@ -205,7 +205,7 @@ export function TeamPage() {
                   
                   <div className="relative z-10 flex flex-col items-center">
                      <div className="w-16 h-1 bg-gradient-to-r from-transparent via-[var(--color-saffron)] to-transparent mb-6 opacity-70" />
-                     <h4 className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-md tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Vedant Kokane</h4>
+                     <h4 className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-md tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>Vedant Santosh Kokane</h4>
                      <div className="text-[10px] md:text-xs tracking-[0.4em] text-[var(--color-saffron)] uppercase font-black drop-shadow-[0_0_15px_rgba(255,153,51,0.5)] bg-[var(--color-saffron)]/10 px-8 py-2.5 rounded-full border border-[var(--color-saffron)]/20">Team Leader</div>
                   </div>
                 </motion.div>
@@ -215,18 +215,19 @@ export function TeamPage() {
             {/* TEAM MEMBERS (PERFECT GRID ALIGNMENT) */}
             <ScrollReveal delay={0.3}>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 max-w-6xl mx-auto">
-                {teamMembers.filter(name => name !== "Vedant Kokane").map((name, index) => (
+                {teamMembers.filter(name => name !== "Vedant Santosh Kokane").map((name, index) => (
                   <motion.div 
                     key={name}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="flex flex-col items-center justify-center h-full min-h-[90px] px-4 py-5 rounded-[1.5rem] bg-gradient-to-b from-white/[0.04] to-transparent border border-white/10 hover:border-white/30 hover:bg-white/[0.08] transition-all duration-300 group cursor-default shadow-lg overflow-hidden relative"
-                    whileHover={reduced ? {} : { y: -3, scale: 1.02 }}
+                    className="flex flex-col items-center justify-center h-full min-h-[90px] px-4 py-5 rounded-[1.5rem] bg-gradient-to-b from-white/[0.04] to-black/40 backdrop-blur-sm border border-white/10 hover:border-[var(--color-saffron)]/40 hover:bg-white/[0.08] hover:shadow-[0_0_25px_rgba(255,153,51,0.15)] transition-all duration-500 group cursor-default overflow-hidden relative"
+                    whileHover={reduced ? {} : { y: -5, scale: 1.03 }}
                   >
-                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <span className="text-sm md:text-[15px] font-semibold text-white/70 group-hover:text-white transition-colors duration-300 tracking-wide text-center leading-snug">{name}</span>
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--color-saffron)]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color-india-green)]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="text-[13px] md:text-[15px] font-bold text-white/70 group-hover:text-white group-hover:drop-shadow-md transition-all duration-300 tracking-wide text-center leading-snug">{name}</span>
                   </motion.div>
                 ))}
               </div>
