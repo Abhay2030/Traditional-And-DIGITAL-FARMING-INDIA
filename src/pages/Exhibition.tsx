@@ -28,13 +28,18 @@ export function Exhibition() {
       >
         <Link to="/team">
           <motion.button
-            className="group relative flex items-center gap-3 px-6 py-3 rounded-full bg-black/40 backdrop-blur-md border border-[var(--color-saffron)]/30 hover:border-[var(--color-saffron)]/70 hover:bg-[#050B14]/80 shadow-[0_0_20px_rgba(255,153,51,0.15)] hover:shadow-[0_0_30px_rgba(255,153,51,0.3)] transition-all duration-300 overflow-hidden"
-            whileHover={reduced ? {} : { scale: 1.05 }}
+            className="group relative flex items-center gap-4 px-8 py-4 rounded-full bg-black/60 backdrop-blur-xl border-2 border-[var(--color-saffron)]/50 hover:border-[var(--color-saffron)] shadow-[0_0_30px_rgba(255,153,51,0.3)] hover:shadow-[0_0_50px_rgba(255,153,51,0.6)] transition-all duration-500 overflow-hidden"
+            whileHover={reduced ? {} : { scale: 1.05, y: -2 }}
             whileTap={reduced ? {} : { scale: 0.95 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-saffron)]/10 via-transparent to-[var(--color-india-green)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <Users size={18} className="text-[var(--color-saffron)]" />
-            <span className="text-sm font-bold tracking-[0.2em] uppercase text-white drop-shadow-md relative z-10">
+            {/* Animated background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-saffron)]/20 via-transparent to-[var(--color-india-green)]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Glowing orb behind icon */}
+            <div className="absolute left-8 w-10 h-10 bg-[var(--color-saffron)]/30 rounded-full blur-xl group-hover:bg-[var(--color-saffron)]/60 transition-colors duration-500" />
+            
+            <Users size={28} className="text-[var(--color-saffron)] relative z-10 group-hover:scale-110 transition-transform duration-500" />
+            <span className="text-base md:text-lg font-bold tracking-[0.25em] uppercase text-white drop-shadow-lg relative z-10">
               Our Team
             </span>
           </motion.button>
